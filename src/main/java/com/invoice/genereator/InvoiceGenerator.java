@@ -1,16 +1,24 @@
 package com.invoice.genereator;
 
 public class InvoiceGenerator {
-    private static final double MINIMUM_COST_PER_KM = 10;
-    private static final int COST_PER_TIME = 1;
-    private static final double MINIMUM_FARE = 5;
+    private static double MINIMUM_COST_PER_KM;
+    private static int COST_PER_TIME;
+    private static double MINIMUM_FARE;
     private RideRepository rideRepository;
+
+    private void setValue(RideType rideType){
+        MINIMUM_COST_PER_KM = rideType.minimumCostPerKM;
+        COST_PER_TIME = rideType.costPerTime;
+        MINIMUM_FARE = rideType.minFare;
+    }
+
     public InvoiceGenerator() {
         this.rideRepository = new RideRepository();
     }
 
 
-    public double calculateFare(double distance, int time) {
+    public double calculateFare(RideType rideType, double distance, int time) {
+        setValue(rideType);
         double totalFare = distance * MINIMUM_COST_PER_KM + time * COST_PER_TIME;
         return Math.max(totalFare, MINIMUM_FARE);
     }
@@ -18,16 +26,17 @@ public class InvoiceGenerator {
     public InvoiceSummary calculateFare(Ride[] rides) {
         double totalFare = 0;
         for (Ride ride:rides) {
-           totalFare += this.calculateFare(ride.distance, ride.time);
+           totalFare += this.calculateFare(ride.rideType, ride.distance, ride.time);
         }
         return new InvoiceSummary(rides.length, totalFare);
     }
 
-    public void addRide(String userId, Ride[] rides) {
-        rideRepository.addRides(userId, rides);
+    public void addRides(String userId, Ride[] rides) {
+        rideRepository.addRide(userId, rides);
     }
 
     public InvoiceSummary getInvoiceSummary(String userId) {
-        return this.calculateFare(rideRepository.getRide(userId));
+        return this.calculateFare(rideRepository.getRides(userId));
     }
+
 }
