@@ -1,4 +1,4 @@
-package com.invoice.genereator;
+package com.invoice.genereator.utility;
 
 public enum RideType {
     NORMAL(10,1,5),

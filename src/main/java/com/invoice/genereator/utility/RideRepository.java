@@ -1,4 +1,6 @@
-package com.invoice.genereator;
+package com.invoice.genereator.utility;
+
+import com.invoice.genereator.services.Ride;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,10 +13,7 @@ public class RideRepository {
         this.userRides = new HashMap<>();
     }
     public void addRide(String userId, Ride[] rides) {
-        ArrayList<Ride> ridesList = this.userRides.get(userId);
-        if (ridesList == null) {
             this.userRides.put(userId, new ArrayList<>((Arrays.asList(rides))));
-        }
     }
     public Ride[] getRides(String userId) {
         return this.userRides.get(userId).toArray(new Ride[0]);

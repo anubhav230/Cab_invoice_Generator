@@ -1,4 +1,4 @@
-package com.invoice.genereator;
+package com.invoice.genereator.services;
 
 public class InvoiceSummary {
     private final int numOfRides;

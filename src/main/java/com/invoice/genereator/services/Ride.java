@@ -1,4 +1,6 @@
-package com.invoice.genereator;
+package com.invoice.genereator.services;
+
+import com.invoice.genereator.utility.RideType;
 
 public class Ride {
     public final double distance;

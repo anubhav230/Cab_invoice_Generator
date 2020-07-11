@@ -1,4 +1,7 @@
-package com.invoice.genereator;
+package com.invoice.genereator.services;
+
+import com.invoice.genereator.utility.RideRepository;
+import com.invoice.genereator.utility.RideType;
 
 public class InvoiceGenerator {
     private static double MINIMUM_COST_PER_KM;
